@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock styles %}
+{% block content %}
+
+
+<!-- Hero Section -->
+<div id="heroCarousel" class="carousel slide full-width-carousel" data-bs-ride="carousel" data-bs-interval="4000"
+    style="margin-top:56px;">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'img/slide.avif' %}" class="d-block "
+                style=" width:100vw; height:calc(100vh - 56px); object-fit:cover;" alt="Slide 1">
+            <div class="blur-overlay"></div>
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center"
+                style="top:0; bottom:0;">
+                <h2 class="display-5 fw-bold">Welcome to HappyCool</h2>
+                <p class="lead mt-3">Order your meals from the college canteen easily and track your orders live!</p>
+                <a href="{% url 'menu' %}" class="btn btn-success btn-lg mt-3"
+                    style="background-color: #69815F !important;">Order Now</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/slide2.avif' %}" class="d-block "
+                style=" width:100vw; height:calc(100vh - 56px); object-fit:cover;" alt="Slide 2">
+            <div class="blur-overlay"></div>
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center"
+                style="top:0; bottom:0;">
+                <h1 class="display-5 fw-bold">Welcome</h1>
+                <p class="lead mt-3">Order your meals from the college canteen easily and track your orders live!</p>
+                <a href="{% url 'menu' %}" class="btn btn-success btn-lg mt-3"
+                    style="background-color: #69815F !important;">Order Now</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/slide3.avif' %}" class="d-block "
+                style=" width:100vw; height:calc(100vh - 56px); object-fit:cover;" alt="Slide 3">
+            <div class="blur-overlay"></div>
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center"
+                style="top:0; bottom:0;">
+                <h1 class="display-5 fw-bold"> HappyCool</h1>
+                <p class="lead mt-3">Order your meals from the college canteen easily and track your orders live!</p>
+                <a href="{% url 'menu' %}" class="btn btn-success btn-lg mt-3"
+                    style="background-color: #69815F !important;">Order Now</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Menu Section -->
+<!-- Menu Section -->
+<!-- < id="menu" class="py-0" style="height: 600px;"> -->
+
+<section id="trending" class="trending_items">
+    <div class="container text-center">
+
+        <!-- <h1 class="fw-bold mb-5" style="color: #000;">Trending Now</h1> -->
+        <h1 class="fw-bold mb-5" style="color: #000;">Trending Now</h1>
+        <!-- <p>This is a test paragraph under Trending Now.</p> -->
+
+        <div class="row g-4 justify-content-center">
+
+            {% for item in trending_items %}
+            <!-- यह HTML ब्लॉक हर trending item के लिए अपने आप रिपीट होगा -->
+            <div class="col-md-3 col-sm-6">
+                <div class="circle-card" style="width: 300px; height: 300px;">
+                    <a href="/add/{{ item.id }}" class="circle-link">
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        <div class="overlay">
+                            <h5>{{ item.name }}</h5>
+                            <p class="card-text text-white">
+                                4.5 <i class="fas fa-star text-warning"></i> (120 ratings)
+                            </p>
+                            <p>₹{{ item.price }}</p>
+                            {% if not item.is_available %}
+                            <span class="badge bg-danger">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <!-- यह मैसेज तभी दिखेगा जब 'trending_items' खाली होगा -->
+            <div class="col-12">
+                <p>No trending items right now.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ABOUT US SECTION -->
+<section id="about" class="about-section">
+    <div class="container py-5">
+        <div class="row align-items-start gx-5">
+            <div class="col-md-6 text-column">
+                <h2 class="text-start mb-4">
+                    <i class="fas fa-feather-alt"></i> Our Story
+                </h2>
+                <hr>
+                <h1 class="about-heading">We've successfully maintained a nutritious diet for several
+                    years.
+                </h1>
+                <hr>
+                <p class="about-description">
+                    Our canteen is the real heart of the campus—it's way more than just a place to grab
+                    food between
+                    classes. It’s where friendships are made, gossip is shared, and everyone takes a
+                    much-needed
+                    break from lectures. It's the unofficial headquarters for last-minute study sessions
+                    fueled by
+                    endless cups of chai. The constant buzz of chatter and laughter is basically the
+                    soundtrack to
+                    our college life.
+
+                    For students juggling a packed schedule, the canteen is a lifesaver, offering
+                    everything from
+                    hot meals to last-minute stationery all in one spot. Honestly, the aroma of fresh
+                    samosas
+                    drifting down the hallway is enough to tempt even the most focused student to ditch
+                    the library
+                    for a few minutes.</p>
+            </div>
+            <div class="col-md-6 image-column">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <img src="{% static 'img/cafeteria.jpg' %}" class="img-fluid rounded" alt="Canteen">
+                    </div>
+                    <div class="col-12">
+                        <!-- <div class="col-md-6 image-column"> -->
+                        <img src="{% static 'img/Cafetria1.jpg' %}" class="img-fluid rounded" alt="Canteen">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Features Section -->
+<section id="features" class="container py-5">
+    <div class="container" style="padding-top: 20px;">
+        <h1 class="fw-bold text-center mb-5">Why we're Smart</h1>
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="card-feature p-4">
+                    <h4 class="fw-bold">Cashless Payments</h4>
+                    <i class="fas fa-credit-card fa-3x text-primary mb-3"></i>
+                    <b>
+                        <p>Pay quickly and securely using UPI, wallets, or your college ID card.</p>
+                    </b>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-feature p-3">
+                    <h4 class="fw-bold">Live Order Tracking</h4>
+                    <i class="fas fa-map-location-dot fa-3x text-success mb-3"></i>
+                    <b>
+                        <p>No more waiting in lines. Know exactly when your order is ready for pickup..
+                        </p>
+                    </b>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-feature p-3">
+                    <h4 class="fw-bold">Personalized Menu</h4>
+                    <i class="fas fa-brain fa-3x text-warning mb-3"></i>
+                    <b>
+                        <p>Get recommendations based on your dietary preferences and order history.</p>
+                    </b>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How it works Section -->
+
+<section id="how-it-works" class="py-5">
+    <div class="container">
+        <div class=" text-center mb-5">
+            <h1 class="fw-bold">Get Your Meal in 3 Easy Steps</h1>
+            <b>
+                <p class="lead text-muted">Fast, simple, and always on time.</p>
+            </b>
+        </div>
+
+        <div class="steps-container">
+
+            <div class="step-card-wrapper">
+                <div class="step-card p-4">
+                    <i class="fas fa-list-ul fa-3x text-primary mb-3"></i>
+                    <h4 class="fw-bold">
+                        Choose Your Meal</h4>
+                    <b>
+                        <p>Explore our daily menu and add your favorite food to the cart.</p>
+                    </b>
+                </div>
+            </div>
+
+            <div class="arrow-wrapper">
+                <i class="fas fa-arrow-right fa-2x"></i>
+            </div>
+
+            <div class="step-card-wrapper">
+                <div class="step-card p-4">
+                    <i class="fas fa-credit-card fa-3x text-success mb-3"></i>
+                    <h4 class="fw-bold">Pay Securely</h4>
+                    <b>
+                        <p>Complete your payment in seconds using UPI or other options.</p>
+                    </b>
+                </div>
+            </div>
+
+            <div class="arrow-wrapper">
+                <i class="fas fa-arrow-right fa-2x"></i>
+            </div>
+
+            <div class="step-card-wrapper">
+                <div class="step-card p-4">
+                    <i class="fas fa-bell fa-3x text-warning mb-3"></i>
+                    <h4 class="fw-bold">Track & Collect</h4>
+                    <b>
+                        <p>Get a notification when your order is ready. No more waiting!</p>
+                    </b>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Testimonial/ Review Section -->
+
+<section id="testimonials" class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">What Students Are Saying</h2>
+            <p class="lead text-muted">Real feedback from our happy customers.</p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <img src="{% static 'img/student1.png' %}" alt="Student Avatar" class="testimonial-avatar">
+                    <div class="star-rating my-3">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The live tracking is a game-changer! I can grab my food
+                        exactly when it's ready without waiting in line. So convenient!"</p>
+                    <footer class="testimonial-author">Rishabh Singh, 2nd Year MCA</footer>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <img src="{% static 'img/student2.png' %}" alt="Student Avatar" class="testimonial-avatar">
+                    <div class="star-rating my-3">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">"Love the variety in the menu, and being able to pay
+                        with UPI is super easy. The veg burger is my absolute favorite!"</p>
+                    <footer class="testimonial-author">Ashish Rai, 2nd Year MCA</footer>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <img src="{% static 'img/student3.png' %}" alt="Student Avatar" class="testimonial-avatar">
+                    <div class="star-rating my-3">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Finally, a system that works! The website is fast, the
+                        staff is quick, and the food is always fresh. Highly recommended."</p>
+                    <footer class="testimonial-author">Astha Singh, 2nd Year MCA</footer>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contact Us -->
+
+<section id="contact" class="py-5 text-center">
+    <div class="container py-2">
+        <h2 class="fw-bold mb-3">
+            <i class="fas fa-phone"></i>
+        </h2>
+        <h1 class="fw-bold mb-3">Contact Us</h1>
+
+        <h5>
+            <b>
+                <p class="mb-4">For queries regarding orders or menu, reach out to the canteen team.</p>
+            </b>
+            <p>Email: <a href="mailto:happycool@college.edu">happycool@college.edu</a></p>
+            <p>Phone: +91 98765 43210</p>
+        </h5>
+    </div>
+</section>
+
+<!-- Footer -->
+<!-- <div>
+                <footer class="footer bg-light text-center py-4 mt-auto">
+                     <div class="container"> 
+                    <p class="mb-1">© 2025 HappyCool Smart Canteen – All Rights Reserved</p>
+                    <p class="mb-0">Developed by College Canteen Automation Project Team</p>
+            </div>
+            </footer>
+        </div>  -->
+{% endblock content %}
+<!-- 
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html> -->

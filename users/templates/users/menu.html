@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/menu.css' %}">
+{% endblock styles %}
+
+{% block content %}
+{# Removed mt-5 as body already has padding-top for fixed navbar #}
+<div class="container py-5 mt-4">
+    <h1 class="fw-bold mb-4 text-center">Explore Our Menu</h1>
+
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-4 category-filters">
+        <a href="{% url 'menu' %}"
+            class="btn {% if not current_category %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+            All
+        </a>
+
+        {% for code, name in categories %}
+        <a href="{% url 'menu' %}?category={{ code }}"
+            class="btn {% if current_category == code %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+            {{ name }}
+        </a>
+        {% endfor %}
+    </div>
+
+    {# Display Django Messages (e.g., "Item Added") #}
+    {% if messages %}
+    <div class="messages mb-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {# row-cols-md-4 might make cards narrow, consider 3 if needed #}
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="menu-items-grid">
+
+        {% for item in items %}
+        <div class="col">
+            <div class="card h-100 shadow-sm menu-item-card">
+                <div class="position-relative">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top menu-item-img" alt="{{ item.name }}">
+                    {% else %}
+                    <img src="{% static 'img/placeholder.png' %}" class="card-img-top menu-item-img"
+                        alt="Placeholder Image">
+                    {% endif %}
+                    <button class="btn btn-outline-danger btn-sm position-absolute top-0 end-0 m-2 favorite-btn"
+                        title="Add to Favorites" data-item-id="{{ item.id }}">
+                        <i class="far fa-heart"></i> {# Starts as empty heart #}
+                    </button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text description-text">{{ item.description|truncatewords:15 }}</p>
+                    <p class="card-text text-muted small">
+                        {# TODO: Replace with dynamic rating #}
+                        4.5 <i class="fas fa-star text-warning"></i> (120 ratings)
+                    </p>
+                    {% if not item.is_available %}
+                    <span class="badge bg-danger">Out of Stock</span>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                    <p class="fw-bold fs-5 mb-0">₹{{ item.price|floatformat:0 }}</p>
+                    <form action="{% url 'add_to_cart' item.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="1">
+                        {# Disable button if item is out of stock #}
+                        <button type="submit" class="btn btn-primary" {% if not item.is_available %}disabled{% endif %}>
+                            Add +
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-muted text-center">No menu items found for this category.</p>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{# Favorite Button Toggle Script #}
+<script>
+    document.querySelectorAll('.favorite-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            // 1. Toggle Visual State
+            button.classList.toggle('active');
+            const heartIcon = button.querySelector('i');
+            heartIcon.classList.toggle('far'); // Toggle empty heart icon
+            heartIcon.classList.toggle('fas'); // Toggle filled heart icon
+
+            // 2. TODO: Send AJAX request to backend
+            // Get item ID: const itemId = button.dataset.itemId;
+            // Get current state: const isFavorite = button.classList.contains('active');
+            // Send fetch/axios request to a Django view to update the database
+            console.log(`Item ${button.dataset.itemId} favorite status changed.`);
+        });
+        // TODO: Initialize favorite button state on page load based on user's saved favorites
+    });
+</script>
+{% endblock content %}

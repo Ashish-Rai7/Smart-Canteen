@@ -1,0 +1,26 @@
+body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .payment-method-tabs .nav-link {
+            border: 1px solid #dee2e6;
+            color: #495057;
+        }
+
+        .payment-method-tabs .nav-link.active {
+            background-color: #0d6efd !important;
+            color: #ffffff !important;
+            border-color: #0d6efd;
+        }
+
+        .order-summary-card {
+            position: sticky;
+            top: 2rem;
+        }
+
+        .qr-code-img {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }

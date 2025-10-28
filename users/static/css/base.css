@@ -1,0 +1,66 @@
+        
+    html, body {
+                height: 100%;
+    }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ensures body always fills viewport */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    flex: 1; /* this makes the main content push footer to the bottom */
+    padding-bottom: 2rem;
+}
+        
+        
+        /* Navbar ke text ke liye--> home/about/contact */
+        .navbar-nav .nav-link {
+            font-size: 1.2rem;
+            font-weight: 900;
+            /* background-color: transparent !important; */
+            /* z-index: 1000; */
+            /* padding-top: 15px;
+            padding-bottom: 15px; */
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+       
+        .menu-container {
+            background-color: #ba7f7f;
+            padding: 50px 0;
+            min-height: 100vh;
+
+        }
+        
+        
+        /* Footer ke liye */
+        .footer {
+            background-color: #f5f7f7;
+            color: rgb(0, 0, 0);
+            padding: 5px 0;
+            /* Check  */
+            width: 100%; /* full viewport width  */
+            margin-top: auto;
+       
+        }
+
+
+        .footer a {
+            color: #1c6fe2;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock styles %}
+{% block content %}
+<div class="container">
+    <div class="card shadow-sm border-0 register-card">
+        <div class="card-body p-4 p-md-5">
+            <i class="fas fa-user-plus"></i>
+            <h2 class="fw-bold text-center mb-4">Create Your Account</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="role-selector" class="form-label fw-bold">Register As:</label>
+                    <select class="form-select" id="role-selector" name="role" required>
+                        <option selected disabled value="">-- Select Your Role --</option>
+                        <option value="student">Student</option>
+                        <option value="staff">Staff / Faculty</option>
+                        <option value="alumni">Alumni (Guest)</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div id="student-fields" class="d-none">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="department" class="form-label">Department</label>
+                            <input type="text" class="form-control" id="department" name="department">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="course" class="form-label">Course</label>
+                            <input type="text" class="form-control" id="course" name="course">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="roll_no" class="form-label">Roll Number</label>
+                        <input type="text" class="form-control" id="roll_no" name="roll_no">
+                    </div>
+                </div>
+
+                <div id="staff-fields" class="d-none">
+                    <div class="mb-3">
+                        <label for="staff_id" class="form-label">Staff / Faculty ID</label>
+                        <input type="text" class="form-control" id="staff_id" name="staff_id">
+                    </div>
+                </div>
+
+                <div id="alumni-fields" class="d-none">
+                    <p class="text-muted small text-center">Welcome back! You are registering as a guest.</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                            required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mt-3">Register</button>
+            </form>
+
+            <p class="text-center mt-3 mb-0">
+                Already have an account? <a href="{% url 'login' %}">Login here</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('role-selector').addEventListener('change', function () {
+        // Hide all dynamic field sections first
+        document.getElementById('student-fields').classList.add('d-none');
+        document.getElementById('staff-fields').classList.add('d-none');
+        document.getElementById('alumni-fields').classList.add('d-none');
+
+        // Get the selected value
+        const selectedRole = this.value;
+
+        // Show the relevant section
+        if (selectedRole === 'student') {
+            document.getElementById('student-fields').classList.remove('d-none');
+        } else if (selectedRole === 'staff') {
+            document.getElementById('staff-fields').classList.remove('d-none');
+        } else if (selectedRole === 'alumni') {
+            document.getElementById('alumni-fields').classList.remove('d-none');
+        }
+    });
+</script>
+{% endblock content %}

@@ -1,0 +1,21 @@
+.product-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+  line-height: 1;
+}
+
+ body {
+      padding: 60px;
+}
+
+/* 
+  

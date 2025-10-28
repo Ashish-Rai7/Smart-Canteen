@@ -1,0 +1,118 @@
+/* --- Menu Item Card --- */
+.menu-item-card {
+  border: none;
+  border-radius: 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+.menu-item-card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
+}
+
+.menu-item-img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0; /* Match card radius */
+}
+
+.description-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+    min-height: 4.5em; /* Adjust as needed */
+}
+
+/* --- Favorite Button --- */
+.favorite-btn {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    line-height: 1;
+    padding: 0;
+    background-color: rgb(251, 251, 251);
+    border: 1px solid #dee2e6; /* Add subtle border */
+}
+
+.favorite-btn:hover {
+    background-color: rgb(180, 76, 76);
+}
+
+.favorite-btn .fa-heart {
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.favorite-btn.active .fa-heart {
+    font-weight: 900; /* Makes far fa-heart become fas fa-heart */
+    color: #dc3545; /* Red color */
+    transform: scale(1.1); /* Slight grow effect */
+}
+
+
+/* --- Add Cart / Quantity Controls --- */
+.card-footer {
+    border-top: none;
+}
+
+.add-cart-controls {
+    min-width: 90px; /* Ensure space for selector */
+    text-align: right;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+}
+.quantity-selector button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0;
+    line-height: 1;
+    font-weight: bold;
+}
+.quantity-selector span.quantity-value {
+    padding: 0 0.75rem;
+    font-weight: bold;
+    min-width: 20px; /* Prevent jumpiness */
+    display: inline-block;
+    text-align: center;
+}
+
+/* --- Sticky Cart Styles (Copy from previous answer if needed) --- */
+.sticky-cart-card {
+  position: sticky;
+  top: 2rem;
+  border-radius: 15px !important;
+  border: none;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+}
+.sticky-cart-card .card-header, .sticky-cart-card .card-footer {
+  border-bottom: 1px solid #f0f0f0;
+  border-top: 1px solid #f0f0f0;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.cart-item:last-child { border-bottom: none; padding-bottom: 0; }
+.cart-item-img { width: 50px; height: 50px; object-fit: cover; border-radius: 10px; }
+.cart-item-details { flex-grow: 1; margin-left: 1rem; }
+.cart-item-details h6 { margin-bottom: 0.25rem; font-weight: bold; }
+.remove-btn { color: #dc3545; background: none; border: none; padding: 0; margin-left: 1rem; opacity: 0.6; transition: opacity 0.2s ease; }
+.remove-btn:hover { opacity: 1; }
+.cart-empty-state i { font-size: 3rem; }
+
+
+
+.category-filters .btn {
+    border-radius: 25px;
+    min-width: 110px;
+    text-transform: capitalize;
+    transition: all 0.2s ease-in-out;
+}
+
+.category-filters .btn:hover {
+    transform: scale(1.05);
+}

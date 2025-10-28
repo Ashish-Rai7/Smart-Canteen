@@ -1,0 +1,56 @@
+/* --- Centering Container --- */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* Adjust min-height to ensure it looks good, accounting for navbar/footer */
+  min-height: 75vh; 
+}
+
+/* --- The Main Login Card --- */
+.login-card {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #0d6efd;
+}
+
+/* --- Form Fields Styling --- */
+.form-control,
+.input-group-text {
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ced4da;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+    outline: none;
+}
+.form-control:focus ~ .input-group-text, .input-group:focus-within .input-group-text {
+    border-color: #0d6efd;
+}
+
+/* --- The Login Button --- */
+.btn-primary {
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.4);
+}
+
+/* .body{
+    padding: 60px;
+} */

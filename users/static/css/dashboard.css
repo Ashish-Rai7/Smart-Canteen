@@ -1,0 +1,59 @@
+/* मेन ट्रैकर कंटेनर */
+.order-status-tracker {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 2rem;
+}
+
+/* स्टेप्स के बीच की लाइन */
+.order-status-tracker::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background-color: #e9ecef;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* हर एक स्टेप */
+.step {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  width: 33.33%;
+}
+
+/* आइकॉन के चारों ओर का गोला */
+.step .icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #e9ecef; /* ग्रे (इनएक्टिव) */
+  color: #adb5bd;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border: 3px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+/* एक्टिव स्टेप का स्टाइल */
+.step.active .icon-wrapper {
+  background-color: #28a745; /* हरा (एक्टिव) */
+  color: #ffffff;
+  border-color: #28a745;
+}
+
+.step.active p {
+  color: #28a745;
+}
+
+.col-lg-5 {
+    align-self: flex-start;
+
+}

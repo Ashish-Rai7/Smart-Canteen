@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% if order %}
+    <div class="alert alert-info text-center" role="alert">
+        <h4 class="alert-heading">Tracking Order #{{ order.order_id_display }}</h4>
+        <p>Placed on: {{ order.created_at|date:"M d, Y, P" }}</p>
+    </div>
+
+    <div class="row g-5 mt-4">
+        <!-- Left Section: Status + QR -->
+        <div class="col-lg-7">
+            <!-- Live Order Status -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-5 text-center">Live Order Status</h4>
+                    <div class="order-status-tracker">
+                        <div class="step active">
+                            <div class="icon-wrapper"><i class="fas fa-check"></i></div>
+                            <p class="fw-bold">Order Placed</p>
+                        </div>
+
+                        <div class="step {% if order.status in 'Preparing Ready Completed' %}active{% endif %}">
+                            <div class="icon-wrapper"><i class="fas fa-utensils"></i></div>
+                            <p class="{% if order.status == 'Preparing' %}fw-bold{% endif %}">In the Kitchen</p>
+                        </div>
+
+                        <div class="step {% if order.status in 'Ready Completed' %}active{% endif %}">
+                            <div class="icon-wrapper"><i class="fas fa-bell"></i></div>
+                            <p class="{% if order.status == 'Ready' %}fw-bold{% endif %}">Ready for Pickup</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Code Section -->
+            <div class="card shadow-sm text-center">
+                <div class="card-header bg-white">
+                    <h4 class="fw-bold mb-0">Your Pickup Code</h4>
+                </div>
+                <div class="card-body p-4">
+                    <p class="text-muted">Show this QR code at the counter to pick up your order.</p>
+                    {% if qr_image %}
+                    <img src="data:image/png;base64,{{ qr_image }}"
+                        alt="QR code for Order #{{ order.order_id_display }}"
+                        style="width: 250px; height: 250px; border: 1px solid #ddd;">
+                    {% else %}
+                    <p class="text-danger">QR Code could not be generated.</p>
+                    {% endif %}
+                    <p class="fw-bold mt-3">Order ID: #{{ order.order_id_display }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section: Order Summary -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Order Summary</h4>
+                    <div class="d-flex justify-content-between text-muted mb-3">
+                        <span>Order ID: #{{ order.order_id_display }}</span>
+                        <span>{{ order.created_at|date:"M d, Y" }}</span>
+                    </div>
+                    <hr>
+
+                    {% for order_item in order.orderitem_set.all %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ order_item.item.name }} (x{{ order_item.quantity }})</span>
+                        <span class="fw-bold">₹{{ order_item.item.price|floatformat:2 * order_item.quantity }}</span>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted">No items found in this order.</p>
+                    {% endfor %}
+                    <hr>
+
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Grand Total Paid</span>
+                        <span>₹{{ order.total_amount|floatformat:2 }}</span> {# Directly use total_amount #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="alert alert-warning text-center" role="alert">
+        <h4 class="alert-heading">No Recent Orders Found</h4>
+        <p>You haven't placed any orders recently. Visit the menu to order!</p>
+        <a href="{% url 'menu' %}" class="btn btn-primary">Go to Menu</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

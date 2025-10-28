@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/payment.css' %}"> {# Assuming you have payment.css #}
+{% endblock styles %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <div class="row g-5">
+        <div class="col-lg-7">
+            <h2 class="fw-bold mb-4">Choose Payment Method</h2>
+
+            <ul class="nav nav-pills nav-fill mb-4 payment-method-tabs" id="paymentTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="upi-tab" ...>UPI</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="card-tab" ...>Card</button>
+                </li>
+            </ul>
+
+            <div class="tab-content pt-3">
+                <div class="tab-pane fade show active" id="upi" ...>
+                </div>
+                <div class="tab-pane fade" id="card" ...>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card shadow-sm order-summary-card">
+                <div class="card-body">
+                    <h4 class="fw-bold mb-4">Order Summary</h4>
+                    {% for item in cart_items %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ item.name }} (x{{ item.quantity }})</span>
+                        <span>₹{{ item.total_price|floatformat:2 }}</span>
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="d-flex justify-content-between text-muted small">
+                        <span>Subtotal</span>
+                        <span>₹{{ subtotal|floatformat:2 }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between text-muted small">
+                        <span>Taxes (5%)</span>
+                        <span>₹{{ tax|floatformat:2 }}</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>To Pay</span>
+                        <span>₹{{ grand_total|floatformat:2 }}</span> {# Final Amount #}
+                    </div>
+
+                    <a href="{% url 'place_order' %}" class="btn btn-success w-100 mt-4 py-2 fw-bold">
+                        <i class="fas fa-lock me-2"></i> Pay ₹{{ grand_total|floatformat:2 }} Securely
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

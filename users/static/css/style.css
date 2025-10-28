@@ -1,0 +1,375 @@
+
+ .body{
+    margin: 0; 
+    padding: 0;
+  }
+      
+
+/* blur ke liye  */
+.blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 56px);
+    backdrop-filter: blur(4px); /* Adjust blur intensity */
+    z-index: 1;
+    pointer-events: none; /* Allows clicks to pass through */
+}
+.carousel-item {
+    position: relative;
+}
+.carousel-caption {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+/* slide text ke effect ke liye  */
+.carousel-caption .btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s , box-shadow 0.2s;
+}
+
+.carousel-caption {
+    transition: transform 0.2s , box-shadow 0.2s;
+}
+
+.full-width-carousel, 
+.carousel-inner  {
+    width: 100vw;
+    position: relative;
+    margin: auto;
+    padding: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
+
+
+
+ 
+        /* Hero Section  */
+
+        .hero {
+            position: relative;
+            margin-top: 56px;
+            margin-bottom: 0;
+            background-size:cover;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            overflow: hidden;
+            min-height: calc(100vh - 56px);
+            width: 100%;
+            padding-top: 56px;
+            padding-bottom: 0 !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* blurred cover photo ke liye  */
+        /* .hero::before {
+                      margin: 0;
+                      padding: 0;
+                      content: "";
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 100%;
+                      background: url("../img/chatgpt.png") no-repeat center;
+                      background-size: cover;
+                      filter: blur(2px); /* adjust blur intensity */
+                      /* z-index: -1; } */
+   
+
+/* Menu section ke liye  */
+
+/* trending now/happy cool / aur texts ke liye */
+        /* .fw-bold{
+          margin-top: 0%;
+        } */
+
+
+        .menu-card img {
+            align-self: flex-start;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 3px 6px rgba(116, 107, 107, 0.937);
+        }
+
+
+
+        /* About Section ke Liye */
+
+        .about-section {
+                background-color: #ffffff;
+                padding: 60px 0;
+                text-align: left;
+                font-family: 'Poppins', sans-serif;
+            }
+
+.about-subtitle {
+  font-size: 1.9rem;
+  font-weight: 1000;
+  color: #363434;
+  margin-bottom: 5px;
+}
+
+/* about ke line k liye */
+.about-section hr {
+  border: none;
+  border-top: 2px solid #3f3d3d;
+  width: 100%;
+  margin: 20px 0 25px 0;
+}
+/* about heading k liye */
+.about-heading {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #4b4949;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+/* about section ke content k liyee  */
+.about-description {
+  font-size: 1.5rem;
+  font-weight: 1000;
+  color: #555;
+  line-height: 2.0;
+  max-width: 750px;
+}
+
+@media (max-width: 768px) {
+  .about-heading {
+    font-size: 2rem;
+  }
+  .about-description {
+    font-size: 1rem;
+  }
+}
+
+.text-column {
+  /* Adds space to the RIGHT of the text */
+  padding-right: 3rem; /* You can increase this value for more space */
+}
+
+.image-column {
+  /* Adds space to the LEFT of the image */
+  padding-left: 2rem; /* You can increase this value for more space */
+}
+
+
+
+
+
+
+
+
+/* Todays Special aur circular images ke liye  */
+
+/* Container for circular cards */
+
+
+.circle-card {
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: -10px;
+  margin-left: -2px;
+  position: relative;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Clickable link inside circle */
+.circle-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-decoration: none;
+}
+
+/* Image styling */
+.circle-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* Overlay for hover content */
+.overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.overlay h5 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.overlay p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Hover Effects */
+.circle-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.circle-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(0.7);
+}
+
+.circle-card:hover .overlay {
+  opacity: 1;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .circle-card {
+    width: 160px;
+    height: 160px;
+  }
+  .overlay h5 {
+    font-size: 1rem;
+  }
+  .overlay p {
+    font-size: 0.9rem;
+  }
+}
+
+
+/* Features ke liye  */
+.card-feature {
+  background-color: #fdfdfd27;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgb(175, 172, 172);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%; 
+}
+
+.card-feature:hover {
+    transform: translateY(-10px); /* Lifts the card up on hover */
+    box-shadow: 0 8px 16px rgb(0, 0, 0);
+}
+
+
+/* How it works ke liye  */
+
+/* Main container for the steps */
+.steps-container {
+  display: flex;
+  justify-content: space-between; /* Evenly spaces the items */
+  align-items: center; /* Vertically centers everything */
+  width: 100%;
+}
+
+/* Wrapper for each step card */
+.step-card-wrapper {
+  flex-basis: 30%; /* Each card takes up about 30% of the space */
+  text-align: center;
+}
+
+/* The card itself */
+.step-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgb(251, 250, 250);
+  height: 100%;
+}
+
+/* The arrow container */
+.arrow-wrapper {
+  color: #100f0f; /* Light grey color for the arrow */
+}
+
+/* --- Responsive: Stack on Mobile and Hide Arrows --- */
+@media (max-width: 767px) {
+  .steps-container {
+    flex-direction: column; /* Stack vertically */
+  }
+  .step-card-wrapper {
+    width: 100%;
+    margin-bottom: 1.5rem; /* Add space between stacked cards */
+  }
+  .arrow-wrapper {
+    display: none; /* Hide the arrows on mobile */
+  }
+}
+
+/* Testimonial/Review Section */
+
+.testimonial-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  text-align: center;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+}
+
+.testimonial-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* Makes the image a circle */
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #e9ecef;
+}
+
+.star-rating {
+  color: #ffc107; /* Gold color for stars */
+}
+
+.testimonial-text {
+  font-style: italic;
+  color: #555;
+}
+
+.testimonial-author {
+  font-weight: bold;
+  color: #333;
+  margin-top: 1rem;
+}
+
+
+
+/* Footer ke liye  */
+
+
+        
+
+        
